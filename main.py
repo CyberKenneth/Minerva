@@ -5,41 +5,46 @@
 Importing the libraries
 Using the command "pip3 install pipreqs" and "pip-tools" to create the requirements.txt file
     """
-
 import os
 import random
 import discord
-# import sys
 from dotenv import load_dotenv # used to import the token from the .env file
-#import pycord #importing the pycord library
 #import asyncio
-
 #print(sys.path)
 #defining the global variables
+bot = discord.bot()
+
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
 client = discord.Client(command_prefix='!', intents=intents)
 
+#writing to the console to let the user know the bot is running
 @client.event
 async def on_ready():
   print('We have logged in as {0.user}'.format(client))
 
-#defining the Function for importing the token
+
 @client.event
 async def on_ready():
     print("Bot is now online!")
-    
+#ending of online message
+ping = bot.create_group("latency", "ping")
 
-@client.slash_command()
-async def hello(ctx, name: str = None):
-    name = name or ctx.author.name
-    await ctx.respond(f"Hello {name}!")
+@bot.command(description="Sends the bot's latency.") # this decorator makes a slash command
+async def ping(ctx): # a slash command will be created with the name "ping"
+    await ctx.respond(f"Pong! Latency is {bot.latency}")
 
-@client.user_command(name="Say Hello")
-async def hi(ctx, user):
-    await ctx.respond(f"{ctx.author.mention} says hello to {user.name}!")
+greetings = bot.create_group("greetings", "Greet people")
+
+@greetings.command()
+async def hello(ctx):
+  await ctx.respond(f"Hello, {ctx.author}!")
+
+@greetings.command()
+async def bye(ctx):
+  await ctx.respond(f"Bye, {ctx.author}!")
     
 '''UNCOMMENT THIS CODE TO ENABLE THE BOT TO RESPOND TO MESSAGES gpt
 # https://jman4190.medium.com/how-to-build-a-discord-gpt3-chat-bot-with-openai-and-python-14177cd926f0

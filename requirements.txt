@@ -1,4 +1,4 @@
 discord.py==2.2.2
 python-dotenv==1.0.0
 python==3.11.2
-discord openai python-dotenv
+#discord openai python-dotenv
