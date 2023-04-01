@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+#Things I Dont want to upload to github repo
+token.txt
+.env
