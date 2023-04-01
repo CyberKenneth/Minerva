@@ -12,11 +12,11 @@ import discord
 # import sys
 from dotenv import load_dotenv # used to import the token from the .env file
 #import pycord #importing the pycord library
-
+#import asyncio
 
 #print(sys.path)
 #defining the global variables
-
+load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
@@ -31,24 +31,26 @@ async def on_ready():
 async def on_ready():
     print("Bot is now online!")
     
-"""
-@bot.slash_command()
+
+@client.slash_command()
 async def hello(ctx, name: str = None):
     name = name or ctx.author.name
     await ctx.respond(f"Hello {name}!")
 
-@bot.user_command(name="Say Hello")
+@client.user_command(name="Say Hello")
 async def hi(ctx, user):
     await ctx.respond(f"{ctx.author.mention} says hello to {user.name}!")
     
-# this is the code we will use first to test the connection
+'''UNCOMMENT THIS CODE TO ENABLE THE BOT TO RESPOND TO MESSAGES gpt
+# https://jman4190.medium.com/how-to-build-a-discord-gpt3-chat-bot-with-openai-and-python-14177cd926f0
+# MAKE SURE TO UNCOMMENT THE IMPORTS AT THE TOP OF THE FILE
+# Make sure also to make this async in its own cog file so it  can hang and be responsive to other commands
 @client.event
 async def on_message(message):
   if message.author == client.user:
     return
   if message.content.startswith(‘Hello Mr. Botface’):
     await message.channel.send(‘Howdy Stranger’)
-
-"""
+'''
 
 client.run(TOKEN)
