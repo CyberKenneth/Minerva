@@ -12,7 +12,8 @@ from dotenv import load_dotenv # used to import the token from the .env file
 #import asyncio
 #print(sys.path)
 #defining the global variables
-bot = discord.bot()
+
+bot = discord.Bot()
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
