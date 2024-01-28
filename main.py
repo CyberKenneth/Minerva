@@ -2,30 +2,29 @@
 # If you would like to use this bot, please contact me at ken cyberresearch (dot) dev. I will be happy to help you get it up and running. I also will be happy to hear any suggestions you may have for this bot. Thank you for your interest in this bot. I hope you enjoy it.
 
 import discord
-import os # default module
 from dotenv import load_dotenv
+import os
 
+# Load environment variables
 load_dotenv()
+
+# Set up Discord bot with intents
 intents = discord.Intents.default()
-intents.members = False  # Enable the members intent
-
-bot = discord.Bot(intents=intents) # load all the variables from the env file
-
+intents.members = True  # Modify as per your bot's functionality
+bot = discord.Bot(intents=intents)
 
 @bot.event
 async def on_ready():
     print(f"{bot.user} is ready and online!")
-    
-@bot.slash_command(name = "hello", description = "Say hello to the bot")
-async def hello(ctx):
-    await ctx.respond("Hey!")
-#bot.load_extension('cogs.Greetings') 
 
+# Loading Gears (Extensions)
+# Replace 'gears.secure_gear' with your actual Gear file path
+bot.load_extension('gears.secure_gear')
+# Load additional Gears individually
+# bot.load_extension('gears.another_gear')
+# bot.load_extension('gears.yet_another_gear')
+# Add more as needed
 
-#cogs_list = [
- #   'cogs.greeting'  # greeting.py
-#]
-
-#or cog in cogs_list:
- #   bot.load_extension(cog) 
-bot.run(os.getenv('TOKEN')) # run the bot with the token
+# Run the bot
+bot_token = os.getenv('TOKEN')  # Ensure your .env file has the TOKEN variable set
+bot.run(bot_token)
